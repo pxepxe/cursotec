@@ -3,3 +3,4 @@ streamlit
 pyngrok
 pandas
 numpy
+altair
