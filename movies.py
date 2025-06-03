@@ -4,10 +4,11 @@ import pandas as pd
 from google.cloud import firestore
 from google.oauth2 import service_account
 import json
+import altair as alt
 
 key_dict = json.loads(st.secrets["textkey"])
-credentials = service_account.Credentials.from_service_account_info(key_dict)
-db = firestore.Client(credentials=credentials, project="cursotec")
+creds = service_account.Credentials.from_service_account_info(key_dict)
+db = firestore.Client(credentials=creds, project="cursotec-c0222")
 
 dbmovies =db.collection("movies")
 
@@ -80,4 +81,5 @@ if new_name and new_company and new_director and new_genre and submit:
         "genre": new_genre
     })
     st.sidebar.success("¡Registro insertado correctamente!")
-
+    st.cache_data.clear()
+    st.rerun()
